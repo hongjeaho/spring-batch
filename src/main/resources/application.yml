@@ -1,6 +1,11 @@
 spring:
-    application:
+  profiles:
+    active: local
+  application:
       name: springDataFlow
+  batch:
+    jdbc:
+      initialize-schema: always
 
 store:
   domain:
@@ -31,3 +36,8 @@ backup:
       connectionTimeout: 60000
       maxLifetime: 60000
       maximumPoolSize: 5
+
+
+logging:
+  level:
+    com.example.spring.batch: DEBUG

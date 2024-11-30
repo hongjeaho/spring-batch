@@ -26,9 +26,13 @@ ext {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-batch'
-    implementation 'org.springframework.cloud:spring-cloud-starter-task'
     implementation 'com.h2database:h2:2.2.224'
     implementation 'org.springframework.plugin:spring-plugin-core:3.0.0'
+
+    implementation 'com.sndyuk:logback-more-appenders:1.8.8'
+    implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
+    implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
+
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.batch:spring-batch-test'

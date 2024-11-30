@@ -1,0 +1,19 @@
+<configuration>
+    <springProfile name="local">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %-40logger{36}:: %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <logger name="org.springframework.jdbc" level="DEBUG"/>
+        <logger name="com.example.spring.batch.datasource.repository" level="TRACE"/>
+        <logger name="com.example.spring.batch" level="DEBUG"/>
+
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+    <logger name="com.mysql" level="WARN" additivity="false"/>
+</configuration>
