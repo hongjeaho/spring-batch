@@ -6,8 +6,8 @@
             </encoder>
         </appender>
 
-        <logger name="org.springframework.jdbc" level="DEBUG"/>
-        <logger name="com.example.spring.batch.datasource.repository" level="TRACE"/>
+        <logger name="org.springframework.jdbc" level="error"/>
+        <logger name="com.example.spring.batch.datasource.repository" level="DEBUG"/>
         <logger name="com.example.spring.batch" level="DEBUG"/>
 
         <root level="INFO">

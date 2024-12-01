@@ -1,10 +1,14 @@
 package com.example.spring.batch.config.datasource;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -13,8 +17,10 @@ import javax.sql.DataSource;
 @Configuration
 public class BackupDataSource {
 
-    public final static String BACKUP_DATASOURCE = "BACKUP_BATCH_DATASOURCE";
-    public final static String BACKUP_DATASOURCE_MANAGER = "BACKUP_BATCH_DATASOURCE_MANAGER";
+    public final static String BACKUP_DATASOURCE = "backupBatchDatasource";
+    public final static String BACKUP_DATASOURCE_MANAGER = "backupBatchDatasourceManager";
+    public static final String BACKUP_DOMAIN_JDBC_TEMPLATE = "backupDomainJdbcTemplate";
+    public static final String BACKUP_DOMAIN_NAMED_PARAMETER_JDBC_OPERATIONS = "backupDomainNamedParameterJdbcOperations";
 
     @Bean(BACKUP_DATASOURCE)
     @ConfigurationProperties("backup.domain.datasource")
@@ -30,5 +36,15 @@ public class BackupDataSource {
         return dataSourceTransactionManager;
     }
 
+    @Bean(name = BACKUP_DOMAIN_NAMED_PARAMETER_JDBC_OPERATIONS)
+    public NamedParameterJdbcOperations drstoreDomainNamedParameterJdbcOperations() {
+        return new NamedParameterJdbcTemplate(backupBatchDataSource());
+    }
+
+    @Bean(name = BACKUP_DOMAIN_JDBC_TEMPLATE)
+    public JdbcTemplate drstoreDomainJdbcTemplate(
+            @Qualifier(BACKUP_DATASOURCE) final DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
 
 }

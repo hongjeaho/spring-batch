@@ -5,7 +5,13 @@ spring:
       name: springDataFlow
   batch:
     jdbc:
-      initialize-schema: always
+      initialize-schema: never
+
+mybatis:
+  type-aliases-package: com.example.spring.batch.dto.**, com.example.spring.batch.entity.**
+  mapper-locations: mybatis-mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
 store:
   domain:
