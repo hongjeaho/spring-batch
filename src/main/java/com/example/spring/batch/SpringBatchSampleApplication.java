@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {
+        "com.example.spring",
         "com.example.spring.batch",
         "com.example.spring.store.datasource",
         "com.example.spring.backup.datasource"

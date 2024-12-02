@@ -7,7 +7,7 @@ spring:
       local: storeDs, backupDs
   batch:
     jdbc:
-      initialize-schema: always
+      initialize-schema: never
 
 batch:
   domain:

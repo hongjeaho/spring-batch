@@ -1,7 +1,6 @@
 package com.example.spring.batch.database;
 
-
-import com.example.spring.store.datasource.dto.MemberVO;
+import com.example.spring.base.dto.MemberVO;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.mybatis.spring.batch.MyBatisPagingItemReader;
@@ -15,6 +14,7 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +27,9 @@ public class DatabaseSampleConfiguration {
     private final SqlSessionFactory storeDomainSqlSessionFactory;
     private final SqlSessionFactory backupDomainSqlSessionFactory;
 
-    public DatabaseSampleConfiguration(SqlSessionFactory storeDomainSqlSessionFactory, SqlSessionFactory backupDomainSqlSessionFactory){
+    public DatabaseSampleConfiguration(
+            @Qualifier("storeDomainSqlSessionFactory") SqlSessionFactory storeDomainSqlSessionFactory,
+            @Qualifier("storeDomainSqlSessionFactory") SqlSessionFactory backupDomainSqlSessionFactory){
         this.storeDomainSqlSessionFactory = storeDomainSqlSessionFactory;
         this.backupDomainSqlSessionFactory = backupDomainSqlSessionFactory;
     }
@@ -55,7 +57,7 @@ public class DatabaseSampleConfiguration {
     @Bean
     public MyBatisPagingItemReader<MemberVO> sampleMybatisUserItemReader() {
         return new MyBatisPagingItemReaderBuilder<MemberVO>()
-                .sqlSessionFactory(storeDomainSqlSessionFactory)
+                .sqlSessionFactory(backupDomainSqlSessionFactory)
                 .queryId("com.example.spring.store.datasource.repository.MemberMapper.findAll")
                 .build();
     }
@@ -73,7 +75,7 @@ public class DatabaseSampleConfiguration {
                 .sqlSessionFactory(backupDomainSqlSessionFactory)
                 .statementId(
                         "com.example.spring.backup.datasource.repository.BackupMemberMapper.insertMember")
-                .assertUpdates(false)
+//                .assertUpdates(false)
                 .build();
     }
 
