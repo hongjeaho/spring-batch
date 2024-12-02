@@ -74,7 +74,7 @@ public class DatabaseSampleConfiguration {
         return new MyBatisBatchItemWriterBuilder<MemberVO>()
                 .sqlSessionFactory(backupDomainSqlSessionFactory)
                 .statementId(
-                        "com.example.spring.backup.datasource.repository.BackupMemberMapper.insertMember")
+                        "com.example.spring.store.datasource.repository.BackupMemberMapper.insertMember")
 //                .assertUpdates(false)
                 .build();
     }

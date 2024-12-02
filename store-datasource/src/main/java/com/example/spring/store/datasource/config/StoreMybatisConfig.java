@@ -26,7 +26,6 @@ import static com.example.spring.store.datasource.config.StoreDataSource.STORE_B
 )
 public class StoreMybatisConfig {
     @Bean
-    @Primary
     public SqlSessionFactory storeDomainSqlSessionFactory(
             @Qualifier(STORE_BATCH_DATASOURCE) final DataSource storeDomainDataSource,
             final ApplicationContext applicationContext

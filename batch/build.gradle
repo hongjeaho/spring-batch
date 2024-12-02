@@ -1,0 +1,19 @@
+
+bootJar.enabled = true
+jar.enabled = true
+
+bootJar {
+    mainClass.set("com.example.spring.batch.SpringBatchSampleApplication")
+    archiveFileName.set("batch.jar")
+}
+
+dependencies {
+    api project(':store-datasource')
+    api project(':backup-datasource')
+
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+
+    implementation 'com.sndyuk:logback-more-appenders:1.8.8'
+    implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
+    implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
+}
