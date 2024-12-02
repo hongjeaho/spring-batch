@@ -1,0 +1,15 @@
+plugins {
+    id("java-library")
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api ("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4")
+    api ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.2")
+
+    runtimeOnly ("com.mysql:mysql-connector-j:8.0.31")
+}

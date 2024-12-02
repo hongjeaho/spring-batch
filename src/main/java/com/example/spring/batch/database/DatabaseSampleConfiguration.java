@@ -1,7 +1,7 @@
 package com.example.spring.batch.database;
 
-import com.example.spring.batch.dto.MemberVO;
-import lombok.RequiredArgsConstructor;
+
+import com.example.spring.store.datasource.dto.MemberVO;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.mybatis.spring.batch.MyBatisPagingItemReader;
@@ -19,8 +19,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import java.time.LocalDateTime;
 
 @Configuration
 @ConditionalOnProperty(name = "spring.batch.job.name", havingValue = "example.database")
@@ -58,15 +56,13 @@ public class DatabaseSampleConfiguration {
     public MyBatisPagingItemReader<MemberVO> sampleMybatisUserItemReader() {
         return new MyBatisPagingItemReaderBuilder<MemberVO>()
                 .sqlSessionFactory(storeDomainSqlSessionFactory)
-                .queryId("com.example.spring.batch.repository.store.MemberMapper.findAll")
+                .queryId("com.example.spring.store.datasource.repository.MemberMapper.findAll")
                 .build();
     }
 
     @Bean
     public ItemProcessor<MemberVO, MemberVO> sampleItemProcessor() {
         return readUser -> {
-            readUser.setCreatedTime(LocalDateTime.now());
-            readUser.setUpdatedTime(LocalDateTime.now());
             return readUser;
         };
     }
@@ -76,7 +72,7 @@ public class DatabaseSampleConfiguration {
         return new MyBatisBatchItemWriterBuilder<MemberVO>()
                 .sqlSessionFactory(backupDomainSqlSessionFactory)
                 .statementId(
-                        "com.example.spring.batch.repository.backup.BackupMemberMapper.insertMember")
+                        "com.example.spring.backup.datasource.repository.BackupMemberMapper.insertMember")
                 .assertUpdates(false)
                 .build();
     }

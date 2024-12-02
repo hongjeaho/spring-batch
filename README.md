@@ -20,7 +20,7 @@ bootJar.enabled = true
 jar.enabled = true
 
 bootJar {
-    mainClass.set("com.example.spring.batch.SpringDataFlowApplication") // Main Application의 경로를 적어준다.
+    mainClass.set("com.example.spring.batch.SpringBatchSampleApplication") // Main Application의 경로를 적어준다.
     archiveFileName.set("batch-0.0.1.jar")
 }
 ```

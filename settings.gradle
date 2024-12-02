@@ -1,1 +1,5 @@
-rootProject.name = 'springDataFlow'
+rootProject.name = 'springBatchSample'
+include 'store-datasource'
+include 'backup-datasource'
+include 'common-base'
+

@@ -1,0 +1,20 @@
+mybatis:
+  type-aliases-package: com.example.spring.backup.datasource.dto.**, com.example.spring.backup.datasource.entity.**
+  mapper-locations: backup-mybatis-mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+store:
+  domain:
+    datasource:
+      poolName: issue-domain-cp
+      type: com.zaxxer.hikari.HikariDataSource
+      driverClassName: com.mysql.cj.jdbc.Driver
+      jdbcUrl: "jdbc:mysql://localhost:3306/store?characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Seoul"
+      username: root
+      password: root
+      auto-commit: false
+      sqlScriptEncoding: UTF-8
+      connectionTimeout: 60000
+      maxLifetime: 60000
+      maximumPoolSize: 5

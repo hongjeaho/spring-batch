@@ -1,25 +1,21 @@
 spring:
+  application:
+    name: springBatchSample
   profiles:
     active: local
-  application:
-      name: springDataFlow
+    group:
+      local: storeDs, backupDs
   batch:
     jdbc:
-      initialize-schema: never
+      initialize-schema: always
 
-mybatis:
-  type-aliases-package: com.example.spring.batch.dto.**, com.example.spring.batch.entity.**
-  mapper-locations: mybatis-mapper/**/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
-
-store:
+batch:
   domain:
     datasource:
       poolName: issue-domain-cp
       type: com.zaxxer.hikari.HikariDataSource
       driverClassName: com.mysql.cj.jdbc.Driver
-      jdbcUrl: "jdbc:mysql://localhost:3306/store?characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Seoul"
+      jdbcUrl: "jdbc:mysql://localhost:3306/batch?characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Seoul"
       username: root
       password: root
       auto-commit: false
@@ -27,22 +23,6 @@ store:
       connectionTimeout: 60000
       maxLifetime: 60000
       maximumPoolSize: 5
-
-backup:
-  domain:
-    datasource:
-      poolName: issue-domain-cp
-      type: com.zaxxer.hikari.HikariDataSource
-      driverClassName: com.mysql.cj.jdbc.Driver
-      jdbcUrl: "jdbc:mysql://localhost:3306/backup?characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Seoul"
-      username: root
-      password: root
-      auto-commit: false
-      sqlScriptEncoding: UTF-8
-      connectionTimeout: 60000
-      maxLifetime: 60000
-      maximumPoolSize: 5
-
 
 logging:
   level:
